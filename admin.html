@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panel de Administración - EasyHotel">
+    <title>Admin Panel - EasyHotel</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="admin-body">
+    <!-- Login Screen -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>Easy<span>Hotel</span></h1>
+                <p>Panel de Administración</p>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" placeholder="admin" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-primary btn-large">Iniciar Sesión</button>
+                <p class="login-hint">Usuario: admin | Contraseña: admin123</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-container" id="adminContainer" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h2>Easy<span>Hotel</span></h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="14" y="14" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="rooms">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                    <span>Habitaciones</span>
+                </a>
+                <a href="#" class="nav-item" data-section="bookings">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    <span>Reservas</span>
+                </a>
+                <a href="#" class="nav-item" data-section="services">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 16v-4M12 8h.01" />
+                    </svg>
+                    <span>Servicios</span>
+                </a>
+                <a href="#" class="nav-item" data-section="gallery">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                    <span>Galería</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="btn-secondary" onclick="logout()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1 id="sectionTitle">Dashboard</h1>
+                <div class="admin-user">
+                    <span>Administrador</span>
+                    <div class="user-avatar">A</div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="admin-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalRooms">0</h3>
+                            <p>Total Habitaciones</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalBookings">0</h3>
+                            <p>Reservas Activas</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 16v-4M12 8h.01" />
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalServices">0</h3>
+                            <p>Servicios Activos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalGallery">0</h3>
+                            <p>Imágenes en Galería</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Reservas Recientes</h3>
+                        <div id="recentBookings" class="recent-list">
+                            <!-- Recent bookings will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Acciones Rápidas</h3>
+                        <div class="quick-actions">
+                            <button class="action-btn" onclick="showSection('rooms')">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19" />
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                </svg>
+                                <span>Nueva Habitación</span>
+                            </button>
+                            <button class="action-btn" onclick="showSection('services')">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19" />
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                </svg>
+                                <span>Nuevo Servicio</span>
+                            </button>
+                            <button class="action-btn" onclick="showSection('gallery')">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19" />
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                </svg>
+                                <span>Agregar Imagen</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rooms Section -->
+            <section id="rooms" class="admin-section">
+                <div class="section-actions">
+                    <button class="btn-primary" onclick="openRoomModal()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19" />
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                        <span>Nueva Habitación</span>
+                    </button>
+                </div>
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Precio</th>
+                                <th>Capacidad</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="roomsTable">
+                            <!-- Rooms will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Bookings Section -->
+            <section id="bookings" class="admin-section">
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Habitación</th>
+                                <th>Check-in</th>
+                                <th>Check-out</th>
+                                <th>Huéspedes</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTable">
+                            <!-- Bookings will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services" class="admin-section">
+                <div class="section-actions">
+                    <button class="btn-primary" onclick="openServiceModal()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19" />
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                        <span>Nuevo Servicio</span>
+                    </button>
+                </div>
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Icono</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="servicesTable">
+                            <!-- Services will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Gallery Section -->
+            <section id="gallery" class="admin-section">
+                <div class="section-actions">
+                    <button class="btn-primary" onclick="openGalleryModal()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19" />
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                        <span>Agregar Imagen</span>
+                    </button>
+                </div>
+                <div class="gallery-admin-grid" id="galleryAdminGrid">
+                    <!-- Gallery items will be loaded here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Room Modal -->
+    <div class="modal" id="roomModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeRoomModal()">&times;</button>
+            <h2 id="roomModalTitle">Nueva Habitación</h2>
+            <form id="roomForm" class="admin-form">
+                <input type="hidden" id="roomId">
+                <div class="form-group">
+                    <label for="roomName">Nombre</label>
+                    <input type="text" id="roomName" required>
+                </div>
+                <div class="form-group">
+                    <label for="roomType">Tipo</label>
+                    <select id="roomType" required>
+                        <option value="Suite">Suite</option>
+                        <option value="Deluxe">Deluxe</option>
+                        <option value="Standard">Standard</option>
+                        <option value="Premium">Premium</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="roomPrice">Precio por Noche</label>
+                        <input type="number" id="roomPrice" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="roomCapacity">Capacidad</label>
+                        <input type="number" id="roomCapacity" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="roomDescription">Descripción</label>
+                    <textarea id="roomDescription" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="roomImage">URL de Imagen</label>
+                    <input type="text" id="roomImage" required>
+                </div>
+                <div class="form-group">
+                    <label for="roomAmenities">Amenidades (separadas por coma)</label>
+                    <input type="text" id="roomAmenities" placeholder="WiFi, TV, Aire Acondicionado">
+                </div>
+                <button type="submit" class="btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Service Modal -->
+    <div class="modal" id="serviceModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeServiceModal()">&times;</button>
+            <h2 id="serviceModalTitle">Nuevo Servicio</h2>
+            <form id="serviceForm" class="admin-form">
+                <input type="hidden" id="serviceId">
+                <div class="form-group">
+                    <label for="serviceName">Nombre</label>
+                    <input type="text" id="serviceName" required>
+                </div>
+                <div class="form-group">
+                    <label for="serviceDescription">Descripción</label>
+                    <textarea id="serviceDescription" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="serviceIcon">Icono SVG</label>
+                    <select id="serviceIcon" required>
+                        <option value="wifi">WiFi</option>
+                        <option value="pool">Piscina</option>
+                        <option value="restaurant">Restaurante</option>
+                        <option value="spa">Spa</option>
+                        <option value="gym">Gimnasio</option>
+                        <option value="parking">Estacionamiento</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div class="modal" id="galleryModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeGalleryModal()">&times;</button>
+            <h2>Agregar Imagen a Galería</h2>
+            <form id="galleryForm" class="admin-form">
+                <div class="form-group">
+                    <label for="galleryTitle">Título</label>
+                    <input type="text" id="galleryTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="galleryCategory">Categoría</label>
+                    <select id="galleryCategory" required>
+                        <option value="rooms">Habitaciones</option>
+                        <option value="facilities">Instalaciones</option>
+                        <option value="dining">Restaurante</option>
+                        <option value="exterior">Exterior</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="galleryImage">URL de Imagen</label>
+                    <input type="text" id="galleryImage" required>
+                </div>
+                <button type="submit" class="btn-primary">Agregar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
